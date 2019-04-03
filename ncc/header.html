@@ -1,0 +1,65 @@
+<?php require_once 'classes/session.php'; 
+if(session::isLoggedIn() == TRUE) { $userName = $_SESSION['userName']; }
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>NCC Report Problem</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="/bootstrap/css/bootswatch.min.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../bower_components/html5shiv/dist/html5shiv.js"></script>
+      <script src="../bower_components/respond/dest/respond.min.js"></script>
+    <![endif]-->
+    <script language="javascript" type="text/javascript">
+      function limitText(limitField, limitCount, limitNum) {
+          if (limitField.value.length > limitNum) {
+              limitField.value = limitField.value.substring(0, limitNum);
+          } else {
+              limitCount.value = limitNum - limitField.value.length;
+          }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">NCC</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../help/">Help</a>
+            </li>
+          </ul>
+          <?php if( session::isLoggedIn() == FALSE ) {
+            echo '<ul class="nav navbar-nav navbar-right">';
+            echo '<li><a href="login.php">Admin Login</a></li>';
+            echo '</ul>';
+          }
+          else if(session::isLoggedIn() == TRUE ){
+           echo '<ul class="nav navbar-nav navbar-right">';
+           echo '<li><a href="admin.php">Admin Panel</a></li>';
+           echo '<li><a>Logged in as ';
+           echo $_SESSION['userName'];
+           echo '</a></li>';
+           echo '<li><a href="logout.php">Logout</a></li>';
+           echo '</ul>';
+          } ?>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container">
+        
